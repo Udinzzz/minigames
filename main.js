@@ -1,4 +1,3 @@
-console.log("testing")
 class Start {
     constructor() {
         this.PlayerName = "Kamu";
@@ -6,6 +5,8 @@ class Start {
         this.playerOption;
         this.botOption;
         this.winner = ""
+        this.playerScore = parseInt(localStorage.getItem("playerScore")) || 0; // Tambahkan skor pemain
+        this.botScore = parseInt(localStorage.getItem("botScore")) || 0; // Tambahkan skor bot
     }
     get getBotOPtion() {
         return this.botOption
@@ -28,33 +29,41 @@ class Start {
     }
     winCalculation() {
         if (this.botOption == "🤚" && this.playerOption == "✌") {
-            return this.winner = this.PlayerName
+            this.winner = this.PlayerName
+            this.playerScore++;
         }
         else if (this.botOption == "✌" && this.playerOption == "✊") {
-            return this.winner = this.PlayerName
+            this.winner = this.PlayerName
+            this.playerScore++;
         }
         else if (this.botOption == "✊" && this.playerOption == "🤚") {
-            return this.winner = this.PlayerName
+            this.winner = this.PlayerName
+            this.playerScore++;
         }
         else if (this.botOption == "✌" && this.playerOption == "🤚") {
-            return this.winner = this.botName
+            this.winner = this.botName
+            this.botScore++
         }
         else if (this.botOption == "✊" && this.playerOption == "✌") {
-            return this.winner = this.botName
+            this.winner = this.botName
+            this.botScore++
         }
         else if (this.botOption == "🤚" && this.playerOption == "✊") {
-            return this.winner = this.botName
+            this.winner = this.botName
+            this.botScore++
         }
         else {
             return this.winner = "SERI"
         }
+        localStorage.setItem("playerScore", this.playerScore);
+        localStorage.setItem("botScore", this.botScore);
     }
     matchResult() {
         if (this.winner != "SERI") {
-            return `${this.winner} MENANG!!`
+            return `${this.winner} MENANG!!`;
         }
         else {
-            return `${this.winner} nih`
+            return `${this.winner} nih`;
 
         }
     }
@@ -72,10 +81,15 @@ function pick(params) {
 
     const inGame = document.getElementById("inGame");
     const result = document.getElementById("result");
+    const userScore = document.getElementById("user");
+    const botScore = document.getElementById("bot");
+
     inGame.textContent = "...."
     result.textContent = "...."
-
+    
     setTimeout(() => {
+        botScore.textContent = `bot : ${start.botScore}`
+        userScore.textContent = `Kamu : ${start.playerScore}`
         inGame.textContent = `${start.getPlayerOption} VS ${start.getBotOPtion}`
         result.textContent = start.matchResult()
     }, 1000)

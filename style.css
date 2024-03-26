@@ -7,6 +7,7 @@ body{
     padding-top: 10vh;
 }
 .summary {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,6 +16,14 @@ body{
     width: 350px;
     height: 400px;
     text-align: center;
+}
+#score {
+    position: absolute;
+    top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 350px;
 }
 .title {
     text-align: center;
